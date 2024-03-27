@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: training
+  datasource:
+    url: jdbc:postgresql://localhost:54321/training
+    username: local
+    password: local
+  jpa:
+    open-in-view: true
+    hibernate.ddl-auto: validate
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  docker:
+    compose:
+      skip:
+        in-tests: false

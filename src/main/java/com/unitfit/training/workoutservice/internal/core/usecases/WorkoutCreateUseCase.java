@@ -1,32 +1,34 @@
 package com.unitfit.training.workoutservice.internal.core.usecases;
 
+import com.unitfit.training.workoutservice.internal.core.domains.ExerciseVO;
+import com.unitfit.training.workoutservice.internal.core.domains.SetsVO;
 import com.unitfit.training.workoutservice.internal.core.domains.Workout;
-import com.unitfit.training.workoutservice.internal.infrastructure.gateways.ExerciseDatabaseGateway;
 import com.unitfit.training.workoutservice.internal.infrastructure.presenters.WorkoutRestPresenter;
 import com.unitfit.training.workoutservice.internal.infrastructure.repositories.WorkoutJPADatabaseGateway;
 import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.WorkoutCreateRequest;
-import com.unitfit.training.workoutservice.internal.infrastructure.utils.mappers.WorkoutMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 public class WorkoutCreateUseCase implements WorkoutInputPort {
 
     private final WorkoutJPADatabaseGateway workoutDatabase;
     private final WorkoutRestPresenter presenter;
-    private final  WorkoutMapper workoutMapper;
     @Override
     @Transactional
     public void execute(WorkoutCreateRequest request) {
         try {
-            Workout workout = workoutMapper.toWorkout(request);
-//            List<Exercise> exercises = new ArrayList<>();
-//            if (nonNull(request.getExercises())) {
-//                exercises = exerciseMapper.toExerciseEntityList(request.getExercises());
-//                exercises = exerciseDatabase.saveAllExercises(exercises);
-//            }
+            Workout workout = new Workout();
 
-//            if (isNotEmpty(exercises)) this.workoutDatabase.saveWorkout(workout);
+//              TODO: terá que mappear os records requests -> records VO's
+//              TODO: para manter a responsabilidade única, transferir o código de mapeando de dao para um factory
+//
+
+//            workout.addExercise(
+//              TODO: adicionar ExerciciosVOS -- terá que vir com os records prontos
+//            );
 
 //          can mapper the workout entity for a data model response
 //          presenter can present this data model as you want (json, xml, grpc...)

@@ -5,11 +5,11 @@ import jakarta.validation.Payload;
 
 import java.lang.annotation.*;
 
-@Constraint(validatedBy = SetConstraintsValidator.class)
+@Constraint(validatedBy = SetsConstraintsValidator.class)
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface SetValidation {
+public @interface SetsValidation {
     String message() default "Configuration of Set is not valid";
 
     Class<?>[] groups() default {};

@@ -11,8 +11,7 @@ class TrainingApplicationTests {
 
  	@Test
 	void modulesVerify(){
-		System.out.println("teste");
-//		modules.verify();
+		modules.verify();
 	}
 
 	@Test

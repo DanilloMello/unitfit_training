@@ -26,7 +26,6 @@ repositories {
 ext {
 	set('springModulithVersion', "1.1.2")
 	set('lombokVersion', "1.18.32")
-	set('mapstruckVersion', "1.5.5.Final")
 }
 
 dependencies {
@@ -38,10 +37,7 @@ dependencies {
 	implementation 'org.liquibase:liquibase-core'
 	runtimeOnly 'org.postgresql:postgresql'
 	compileOnly "org.projectlombok:lombok:${lombokVersion}"
-	compileOnly "org.mapstruct:mapstruct:${mapstruckVersion}"
 	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
-	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruckVersion}"
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

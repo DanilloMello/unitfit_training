@@ -1,9 +1,0 @@
-services:
-  db_local:
-    image: postgres:16.0
-    environment:
-      POSTGRES_DB: training
-      POSTGRES_USER: local
-      POSTGRES_PASSWORD: local
-    ports:
-      - "54321:5432"

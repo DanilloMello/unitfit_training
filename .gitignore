@@ -1,4 +1,5 @@
 /.gradle
+training/gradle/wrapper/caches/**
 /.idea
 /build/**
 !/training/src

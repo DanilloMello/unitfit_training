@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class WorkoutRestController {
+
     private final ApplicationContext context;
     @PostMapping("/workouts")
-
     public void create(@RequestBody WorkoutCreateRequest request){
-        WorkoutCreateUseCase createUseCase = context.getBean("WorkoutCreateUsecase", WorkoutCreateUseCase.class);
+        WorkoutCreateUseCase createUseCase = context.getBean("workoutCreateUsecase", WorkoutCreateUseCase.class);
         createUseCase.execute(request);
     }
 }

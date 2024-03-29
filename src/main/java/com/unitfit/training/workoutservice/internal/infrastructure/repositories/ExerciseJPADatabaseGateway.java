@@ -1,22 +1,17 @@
 package com.unitfit.training.workoutservice.internal.infrastructure.repositories;
 
-import com.unitfit.training.workoutservice.internal.core.domains.ExerciseVO;
+import com.unitfit.training.workoutservice.internal.core.domains.Exercise;
 import com.unitfit.training.workoutservice.internal.infrastructure.gateways.ExerciseDatabaseGateway;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
 @RequiredArgsConstructor
+@Component
 public class ExerciseJPADatabaseGateway implements ExerciseDatabaseGateway {
-
     private final ExerciseJPARepository exerciseJPARepository;
     @Override
-    public ExerciseVO saveExercise(ExerciseVO exerciseVO) {
-        return exerciseVO;
-    }
-
-    @Override
-    public List<ExerciseVO> saveAllExercises(List<ExerciseVO> exerciseVOS) {
-        return exerciseVOS;
+    public List<Exercise> saveAllExercises(List<Exercise> exercises){
+        return exerciseJPARepository.saveAll(exercises);
     }
 }

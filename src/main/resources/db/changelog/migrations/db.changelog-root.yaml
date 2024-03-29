@@ -64,7 +64,7 @@ databaseChangeLog:
               tableName: set_configuration
       changes:
         - createTable:
-            tableName: set_configuration
+            tableName: sets
             columns:
               - column:
                   name: set_order
@@ -77,7 +77,7 @@ databaseChangeLog:
                   constraints:
                     nullable: true
               - column:
-                  name: repetition_time
+                  name: repetition_by_time
                   type: numeric(21)
                   constraints:
                     nullable: true

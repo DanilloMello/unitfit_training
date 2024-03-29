@@ -4,7 +4,7 @@ import java.time.Duration;
 public record SetsCreateRequest (
      Integer setOrder,
      Integer repetition,
-     Duration repetitionTime,
+     Duration repetitionByTime,
      String cadence,
      Duration restBetweenExercises,
      Duration restBetweenSets,

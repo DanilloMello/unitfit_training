@@ -1,14 +1,17 @@
 package com.unitfit.training.workoutservice.internal.core.domains;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @EqualsAndHashCode
 @RequiredArgsConstructor
-@ToString
 @Getter
 @Entity
 public class Workout {
@@ -21,6 +24,10 @@ public class Workout {
     private String name;
 
     @Transient
-    @Setter
-    private List<Exercise> exercises;
+    private List<Exercise> exercises = new ArrayList<>();
+
+    public void addExercise(Exercise exercise){
+        this.exercises.add(exercise);
+    }
+
 }

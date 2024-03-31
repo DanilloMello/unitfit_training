@@ -2,6 +2,6 @@ package com.unitfit.training.workoutservice.internal.core.usecases;
 
 import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.WorkoutCreateRequest;
 
-public interface WorkoutInputPort {
+public interface WorkoutInputPortUsecase {
     void execute(WorkoutCreateRequest request);
 }

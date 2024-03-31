@@ -1,6 +1,5 @@
 package com.unitfit.training.workoutservice.internal.infrastructure.presenters;
 
-import com.unitfit.training.workoutservice.internal.core.domains.Workout;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,11 +11,11 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import java.io.IOException;
 
 @RequiredArgsConstructor
-public class WorkoutRestPresenter implements WorkoutPresenter {
+public class WorkoutRestPresenter implements WorkoutOutputPortPresenter {
     private final HttpServletResponse httpServletResponse;
     private final MappingJackson2HttpMessageConverter jacksonConverter;
     @Override
-    public void presentWorkout(Workout workout) {
+    public void presentCreateWorkout(Record response) {
         /*
             Doing a bit of heavy lifting here ourselves:
             need to serialize the response model as JSON
@@ -36,7 +35,7 @@ public class WorkoutRestPresenter implements WorkoutPresenter {
 
         // serialize response model to JSON as the body of the message
         try {
-            jacksonConverter.write(workout, MediaType.APPLICATION_JSON, httpOutputMessage);
+            jacksonConverter.write(response, MediaType.APPLICATION_JSON, httpOutputMessage);
         } catch (IOException e) {
             // just for this example
             throw new RuntimeException(e);

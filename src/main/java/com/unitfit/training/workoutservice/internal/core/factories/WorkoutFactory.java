@@ -1,13 +1,14 @@
-package com.unitfit.training.workoutservice.internal.infrastructure.utils.factories;
+package com.unitfit.training.workoutservice.internal.core.factories;
 
 import com.unitfit.training.workoutservice.internal.core.domains.Exercise;
 import com.unitfit.training.workoutservice.internal.core.domains.SetsVO;
 import com.unitfit.training.workoutservice.internal.core.domains.Workout;
-import com.unitfit.training.workoutservice.internal.infrastructure.repositories.ExerciseJPADatabaseGateway;
-import com.unitfit.training.workoutservice.internal.infrastructure.repositories.WorkoutJPADatabaseGateway;
+import com.unitfit.training.workoutservice.internal.infrastructure.gateways.ExerciseDatabaseGateway;
+import com.unitfit.training.workoutservice.internal.infrastructure.gateways.WorkoutDatabaseGateway;
 import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.ExerciseCreateRequest;
 import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.SetsCreateRequest;
 import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.WorkoutCreateRequest;
+import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.WorkoutCreateResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,26 +16,25 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.Objects.nonNull;
+
 @Component
 @RequiredArgsConstructor
-public class WorkoutFactory implements EntityFactory<Workout>{
-
-    private final WorkoutJPADatabaseGateway workoutDatabase;
-    private final ExerciseJPADatabaseGateway exerciseDatabase;
+public class WorkoutFactory implements DomainFactory<WorkoutCreateRequest> {
+    private final WorkoutDatabaseGateway database;
+    private final ExerciseDatabaseGateway exerciseDatabase;
     @Override
-    public Workout create(Record request) {
+    public Record create(WorkoutCreateRequest request) {
         if (nonNull(request)) {
-            if (request instanceof WorkoutCreateRequest workoutCreateRequest) return requestCreateToWorkout(workoutCreateRequest);
-            throw new IllegalArgumentException("Type of request was not found.");
+            return requestCreateToWorkout(request);
         } else {
             throw new NullPointerException();
         }
     }
-    private Workout requestCreateToWorkout(WorkoutCreateRequest request) {
-        Workout workout = this.workoutDatabase.saveWorkout(new Workout(request.name()));
+    private Record requestCreateToWorkout(WorkoutCreateRequest request) {
+        Workout workout = this.database.saveWorkout(new Workout(request.name()));
         List<Exercise> exercises = exerciseCreateRequestListToExerciseVOList(request.exercisesCreateRequest(), workout);
-        workout.setExercises(this.exerciseDatabase.saveAllExercises(exercises));
-        return workout;
+        exercises = this.exerciseDatabase.saveAllExercises(exercises);
+        return new WorkoutCreateResponse(workout.getName(), exercises);
     }
     private List<Exercise> exerciseCreateRequestListToExerciseVOList(List<ExerciseCreateRequest> request, Workout workout) {
         return request
@@ -49,7 +49,7 @@ public class WorkoutFactory implements EntityFactory<Workout>{
     }
 
     private List<SetsVO> setsCreateRequestListToSetsVOList(List<SetsCreateRequest> request) {
-        AtomicInteger sets = new AtomicInteger(1);
+        AtomicInteger sets = new AtomicInteger(0);
         return request
                 .stream()
                 .map(scr ->

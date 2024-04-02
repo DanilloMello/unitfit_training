@@ -7,7 +7,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class WorkoutCreateUseCase implements WorkoutInputPortUsecase{
+public class WorkoutCreateUseCase implements WorkoutInputPortUsecase<WorkoutCreateRequest>{
 
     private final WorkoutOutputPortPresenter presenter;
     private final DomainFactory<WorkoutCreateRequest> factory;

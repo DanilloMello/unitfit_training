@@ -1,7 +1,7 @@
 package com.unitfit.training.workoutservice.internal.core.usecases;
 
-import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.WorkoutCreateRequest;
+import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.ValidationRequestDTO;
 
-public interface WorkoutInputPortUsecase {
-    void execute(WorkoutCreateRequest request);
+public interface WorkoutInputPortUsecase<T extends ValidationRequestDTO> {
+    void execute(T request);
 }

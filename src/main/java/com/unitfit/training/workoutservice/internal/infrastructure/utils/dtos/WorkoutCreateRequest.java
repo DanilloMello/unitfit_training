@@ -4,5 +4,10 @@ import java.util.List;
 
 public record WorkoutCreateRequest(
     String name,
-    List<ExerciseCreateRequest> exercisesCreateRequest
-) { }
+    List<ExerciseCreateRequest> exercisesRequest
+) implements ValidationRequestDTO {
+    @Override
+    public Boolean isValid() {
+        return true;
+    }
+}

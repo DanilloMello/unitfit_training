@@ -1,14 +1,14 @@
 package com.unitfit.training.workoutservice.internal.core.domains;
 
-import com.unitfit.training.workoutservice.internal.infrastructure.utils.contraints.SetsValidation;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 import java.time.Duration;
 
+import static java.util.Objects.isNull;
+
 @Embeddable
-@SetsValidation
-public record SetsVO(
+public record Set(
         @Column(nullable = false)
         Integer setOrder,
         Integer repetition,
@@ -22,5 +22,10 @@ public record SetsVO(
         Integer weight,
         @Column(nullable = false)
         Integer rangeOfMotion
-) { }
-
+) {
+        public Set {
+                if (isNull(repetition) && isNull(repetitionByTime)) {
+                        throw new IllegalArgumentException("teste");
+                }
+        }
+}

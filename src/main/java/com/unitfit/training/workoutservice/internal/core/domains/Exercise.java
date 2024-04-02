@@ -1,5 +1,7 @@
 package com.unitfit.training.workoutservice.internal.core.domains;
 
+import com.unitfit.training.workoutservice.internal.core.domains.constraints.DomainValidated;
+import com.unitfit.training.workoutservice.internal.core.domains.constraints.DomainValidation;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,10 +12,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @RequiredArgsConstructor
 @Entity
-public class Exercise {
+@DomainValidated
+public class Exercise extends DomainValidation {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
@@ -25,13 +28,18 @@ public class Exercise {
     @NonNull
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
-            name = "sets",
+            name = "set",
             joinColumns = @JoinColumn(name = "exercise_id", referencedColumnName = "id")
     )
-    List<SetsVO> sets;
+    List<Set> sets;
 
     @NonNull
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "workout_id")
     Workout workout;
+
+    @Override
+    public Boolean isValid() {
+        return true;
+    }
 }

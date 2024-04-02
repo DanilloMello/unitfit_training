@@ -64,7 +64,7 @@ databaseChangeLog:
               tableName: set_configuration
       changes:
         - createTable:
-            tableName: sets
+            tableName: set
             columns:
               - column:
                   name: set_order

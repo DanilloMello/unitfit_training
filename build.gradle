@@ -26,6 +26,7 @@ repositories {
 ext {
 	set('springModulithVersion', "1.1.2")
 	set('lombokVersion', "1.18.32")
+	set('openapiVersion', "2.5.0")
 }
 
 dependencies {
@@ -34,6 +35,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.modulith:spring-modulith-starter-core'
 	implementation 'org.springframework.modulith:spring-modulith-starter-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}"
 	implementation 'org.liquibase:liquibase-core'
 	runtimeOnly 'org.postgresql:postgresql'
 	compileOnly "org.projectlombok:lombok:${lombokVersion}"
@@ -55,4 +58,3 @@ dependencyManagement {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-

@@ -11,21 +11,23 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
-    String schemeName = "bearerAuth";
-    String bearerFormat = "JWT";
-    String scheme = "bearer";
+
+    final static String SCHEME_NAME = "bearerAuth";
+    final static String BEARER_FORMAT = "JWT";
+    final static String SCHEME = "bearer";
+
     @Bean
     public OpenAPI caseOpenAPI() {
         return new OpenAPI()
                 .addSecurityItem(new SecurityRequirement()
-                        .addList(schemeName)).components(new Components()
+                        .addList(SCHEME_NAME)).components(new Components()
                         .addSecuritySchemes(
-                                schemeName, new SecurityScheme()
-                                        .name(schemeName)
+                                SCHEME_NAME, new SecurityScheme()
+                                        .name(SCHEME_NAME)
                                         .type(SecurityScheme.Type.HTTP)
-                                        .bearerFormat(bearerFormat)
+                                        .bearerFormat(BEARER_FORMAT)
                                         .in(SecurityScheme.In.HEADER)
-                                        .scheme(scheme)
+                                        .scheme(SCHEME)
                         )
                 )
                 .info(new Info()

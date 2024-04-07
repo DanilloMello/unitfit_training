@@ -7,3 +7,16 @@ services:
     - 'POSTGRES_DB=training'
     - 'POSTGRES_USER=local'
     - 'POSTGRES_PASSWORD=local'
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command: 'start-dev'
+    networks:
+      - keycloak-network
+
+networks:
+  keycloak-network:

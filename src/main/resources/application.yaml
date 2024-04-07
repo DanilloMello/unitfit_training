@@ -1,6 +1,22 @@
+server:
+  port: 9090
 spring:
   application:
     name: training
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          keycloak:
+#            client-id: unitfit-training-backend
+#            client-secret: pQmMzccxiG0v5l3VbaHoB7FcNVcdC01I
+#            scope: openid, profile, email
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:8080/realms/unitfit
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8080/realms/unitfit
   datasource:
     url: jdbc:postgresql://localhost:15432/training
     username: local

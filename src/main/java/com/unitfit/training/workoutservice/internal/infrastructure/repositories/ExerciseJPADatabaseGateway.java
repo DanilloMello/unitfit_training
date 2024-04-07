@@ -11,7 +11,7 @@ import java.util.List;
 public class ExerciseJPADatabaseGateway implements ExerciseDatabaseGateway {
     private final ExerciseJPARepository exerciseJPARepository;
     @Override
-    public List<Exercise> saveAllExercises(List<Exercise> exercises){
-        return exerciseJPARepository.saveAll(exercises);
+    public void saveAllExercises(List<Exercise> exercises){
+        this.exerciseJPARepository.saveAll(exercises);
     }
 }

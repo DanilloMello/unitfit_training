@@ -27,7 +27,13 @@ public class Workout extends DomainValidation {
     private String name;
 
     @Transient
-    private List<Exercise> exercises = new ArrayList<>();
+    private final List<Exercise> exercises = new ArrayList<>();
+
+    private Student student;
+
+    private Periodization periodization;
+
+    private Teacher teacher;
 
     public void addExercise(Exercise exercise){
         this.exercises.add(exercise);

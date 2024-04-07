@@ -1,7 +1,7 @@
 package com.unitfit.training.workoutservice.internal.infrastructure.configs;
 
 import com.unitfit.training.workoutservice.internal.core.factories.WorkoutFactory;
-import com.unitfit.training.workoutservice.internal.core.usecases.WorkoutCreateUseCase;
+import com.unitfit.training.workoutservice.internal.core.usecases.WorkoutCreateUsecase;
 import com.unitfit.training.workoutservice.internal.infrastructure.presenters.WorkoutRestPresenter;
 import com.unitfit.training.workoutservice.internal.infrastructure.repositories.ExerciseJPADatabaseGateway;
 import com.unitfit.training.workoutservice.internal.infrastructure.repositories.ExerciseJPARepository;
@@ -20,12 +20,12 @@ public class WorkoutConfig {
 
     @Scope("request")
     @Bean(autowireCandidate = false, name = "workoutCreateUsecase")
-    public WorkoutCreateUseCase workoutCreateUsecaseBean(
+    public WorkoutCreateUsecase workoutCreateUsecaseBean(
             HttpServletResponse httpServletResponse,
             MappingJackson2HttpMessageConverter jacksonConverter,
             WorkoutJPARepository workoutJPARepository,
             ExerciseJPARepository exerciseJPARepository) {
-        return new WorkoutCreateUseCase(
+        return new WorkoutCreateUsecase(
                 new WorkoutRestPresenter(
                         httpServletResponse,
                         jacksonConverter),

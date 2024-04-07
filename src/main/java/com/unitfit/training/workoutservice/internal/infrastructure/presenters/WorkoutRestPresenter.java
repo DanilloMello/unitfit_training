@@ -15,7 +15,7 @@ public class WorkoutRestPresenter implements WorkoutOutputPortPresenter {
     private final HttpServletResponse httpServletResponse;
     private final MappingJackson2HttpMessageConverter jacksonConverter;
     @Override
-    public void presentCreateWorkout(Record response) {
+    public void presentWorkout(Record response) {
         /*
             Doing a bit of heavy lifting here ourselves:
             need to serialize the response model as JSON

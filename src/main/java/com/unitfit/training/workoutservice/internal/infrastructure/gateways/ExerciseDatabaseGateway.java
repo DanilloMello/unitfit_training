@@ -5,5 +5,5 @@ import com.unitfit.training.workoutservice.internal.core.domains.Exercise;
 import java.util.List;
 
 public interface ExerciseDatabaseGateway {
-    List<Exercise> saveAllExercises(List<Exercise> exercises);
+    void saveAllExercises(List<Exercise> exercises);
 }

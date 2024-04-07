@@ -1,6 +1,5 @@
 package com.unitfit.training.workoutservice.internal.infrastructure.configs;
 
-
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -12,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
 
-    final static String SCHEME_NAME = "bearerAuth";
-    final static String BEARER_FORMAT = "JWT";
-    final static String SCHEME = "bearer";
+    static final String SCHEME_NAME = "bearerAuth";
+    static final String BEARER_FORMAT = "JWT";
+    static final String SCHEME = "bearer";
 
     @Bean
     public OpenAPI caseOpenAPI() {

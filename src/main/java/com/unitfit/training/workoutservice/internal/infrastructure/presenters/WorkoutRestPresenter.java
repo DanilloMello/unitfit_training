@@ -1,5 +1,7 @@
 package com.unitfit.training.workoutservice.internal.infrastructure.presenters;
 
+import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.WorkoutFindByClientIdResponse;
+import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.WorkoutFindByIdResponse;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,42 +11,49 @@ import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class WorkoutRestPresenter implements WorkoutOutputPortPresenter {
     private final HttpServletResponse httpServletResponse;
     private final MappingJackson2HttpMessageConverter jacksonConverter;
-    @Override
-    public void presentWorkout(Record response) {
-        /*
-            Doing a bit of heavy lifting here ourselves:
-            need to serialize the response model as JSON
-            to the HTTP response. This will normally will
-            be done by Spring Web when a request handling
-            method returning the response model and annotated
-            with ResponseBody.
-         */
 
-        // construct HTTP output message working with Servlet HTTP
-        // response
+    @Override
+    public void presentCreateUsecase(HttpStatus response) {
         final DelegatingServerHttpResponse httpOutputMessage =
                 new DelegatingServerHttpResponse(new ServletServerHttpResponse(httpServletResponse));
-
-        // set status OK
-        httpOutputMessage.setStatusCode(HttpStatus.OK);
-
-        // serialize response model to JSON as the body of the message
+        httpOutputMessage.setStatusCode(response);
         try {
             jacksonConverter.write(response, MediaType.APPLICATION_JSON, httpOutputMessage);
         } catch (IOException e) {
-            // just for this example
             throw new RuntimeException(e);
         }
-
     }
+
+    @Override
+    public void presentFindByClientIdUsecase(List<WorkoutFindByClientIdResponse> response) {
+        final DelegatingServerHttpResponse httpOutputMessage =
+                new DelegatingServerHttpResponse(new ServletServerHttpResponse(httpServletResponse));
+        try {
+            jacksonConverter.write(response, MediaType.APPLICATION_JSON, httpOutputMessage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void presentFindByIdUsecase(WorkoutFindByIdResponse response) {
+        final DelegatingServerHttpResponse httpOutputMessage =
+                new DelegatingServerHttpResponse(new ServletServerHttpResponse(httpServletResponse));
+        try {
+            jacksonConverter.write(response, MediaType.APPLICATION_JSON, httpOutputMessage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void presentError(Exception exception) {
-//       Treat handling exception here
         throw new RuntimeException(exception);
     }
 }

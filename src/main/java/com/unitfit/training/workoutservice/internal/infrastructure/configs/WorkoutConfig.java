@@ -1,7 +1,7 @@
 package com.unitfit.training.workoutservice.internal.infrastructure.configs;
 
 import com.unitfit.training.workoutservice.internal.core.factories.WorkoutFactory;
-import com.unitfit.training.workoutservice.internal.core.usecases.WorkoutCreateUsecase;
+import com.unitfit.training.workoutservice.internal.core.usecases.*;
 import com.unitfit.training.workoutservice.internal.infrastructure.presenters.WorkoutRestPresenter;
 import com.unitfit.training.workoutservice.internal.infrastructure.repositories.ExerciseJPADatabaseGateway;
 import com.unitfit.training.workoutservice.internal.infrastructure.repositories.ExerciseJPARepository;
@@ -13,19 +13,20 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.context.WebApplicationContext;
 
 @Configuration
 @ComponentScan(basePackages = {"com.unitfit.training.workoutservice"})
 public class WorkoutConfig {
 
-    @Scope("request")
-    @Bean(autowireCandidate = false, name = "workoutCreateUsecase")
-    public WorkoutCreateUsecase workoutCreateUsecaseBean(
+    @Scope(WebApplicationContext.SCOPE_REQUEST)
+    @Bean(autowireCandidate = false)
+    public IWorkoutCreateUsercase workoutCreateUsecaseBean(
             HttpServletResponse httpServletResponse,
             MappingJackson2HttpMessageConverter jacksonConverter,
             WorkoutJPARepository workoutJPARepository,
             ExerciseJPARepository exerciseJPARepository) {
-        return new WorkoutCreateUsecase(
+        return new WorkoutCreateUsercaseImpl(
                 new WorkoutRestPresenter(
                         httpServletResponse,
                         jacksonConverter),
@@ -35,4 +36,32 @@ public class WorkoutConfig {
                 )
         );
     }
+
+//    @Scope(WebApplicationContext.SCOPE_REQUEST)
+//    @Bean(autowireCandidate = false)
+//    public IWorkoutFindByIdUsercase workoutFindByIdUsercaseBean(
+//            HttpServletResponse httpServletResponse,
+//            MappingJackson2HttpMessageConverter jacksonConverter,
+//            WorkoutJPARepository workoutJPARepository) {
+//        return new WorkoutFindByIdUsecaseImpl(
+//                new WorkoutRestPresenter(
+//                        httpServletResponse,
+//                        jacksonConverter),
+//                new WorkoutJPADatabaseGateway(workoutJPARepository)
+//        );
+//    }
+//
+//    @Scope(WebApplicationContext.SCOPE_REQUEST)
+//    @Bean(autowireCandidate = false)
+//    public IWorkoutFindByClientIdUsercase workoutFindByClientIdUsercaseBean(
+//            HttpServletResponse httpServletResponse,
+//            MappingJackson2HttpMessageConverter jacksonConverter,
+//            WorkoutJPARepository workoutJPARepository) {
+//        return new WorkoutFindByClientIdUsecaseImpl(
+//                new WorkoutRestPresenter(
+//                        httpServletResponse,
+//                        jacksonConverter),
+//                new WorkoutJPADatabaseGateway(workoutJPARepository)
+//        );
+//    }
 }

@@ -3,20 +3,20 @@ server:
 spring:
   application:
     name: training
-  security:
-    oauth2:
-      client:
-        registration:
-          keycloak:
-            client-id: unitfit-training-backend
-            client-secret: iTiM5oATcjZTEM1YB9howoIh4S0KLPx8
-            scope: openid, profile, email
-        provider:
-          keycloak:
-            issuer-uri: http://localhost:8080/realms/unitfit
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8080/realms/unitfit
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          keycloak:
+#            client-id: unitfit-training-backend
+#            client-secret: iTiM5oATcjZTEM1YB9howoIh4S0KLPx8
+#            scope: openid, profile, email
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:8080/realms/unitfit
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8080/realms/unitfit
   datasource:
     url: jdbc:postgresql://localhost:15432/training
     username: local

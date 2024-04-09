@@ -24,6 +24,9 @@ databaseChangeLog:
                   type: varchar(50)
                   constraints:
                     nullable: false
+              - column:
+                  name: client_Id
+                  type: UUID
   - changeSet:
       id: 2
       author: admin

@@ -6,10 +6,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.context.annotation.ApplicationScope;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
+@ApplicationScope
 @EnableWebSecurity
 public class SecurityConfig {
 
@@ -27,10 +29,10 @@ public class SecurityConfig {
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .anyRequest().authenticated()
                 )
-//                .httpBasic(withDefaults())
-//                .build();
-                .oauth2Login(withDefaults())
-                .oauth2ResourceServer(conf -> conf.jwt(withDefaults()))
+                .httpBasic(withDefaults())
                 .build();
+//                .oauth2Login(withDefaults())
+//                .oauth2ResourceServer(conf -> conf.jwt(withDefaults()))
+//                .build();
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 @RequiredArgsConstructor
-@Component
 public class ExerciseJPADatabaseGateway implements ExerciseDatabaseGateway {
     private final ExerciseJPARepository exerciseJPARepository;
     @Override

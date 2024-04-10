@@ -4,5 +4,5 @@ import java.util.List;
 
 public record WorkoutFindByIdResponse(
         String name,
-        List<ExerciseDTO> exercise
+        List<ExerciseDTO> exercises
 ) { }

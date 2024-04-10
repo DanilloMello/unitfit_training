@@ -12,8 +12,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = false)
 @RequiredArgsConstructor
 @NoArgsConstructor
-@Getter
-@Entity
+@Getter @Entity
 @DomainValidated
 public class Workout extends DomainValidation {
     @Id
@@ -28,7 +27,6 @@ public class Workout extends DomainValidation {
     private UUID clientId;
 
     @Transient
-    @OneToMany(cascade = CascadeType.ALL)
     private final List<Exercise> exercises = new ArrayList<>();
 
     public void addExercise(Exercise exercise){

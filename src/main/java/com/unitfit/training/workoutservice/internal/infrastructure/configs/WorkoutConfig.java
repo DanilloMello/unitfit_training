@@ -37,19 +37,19 @@ public class WorkoutConfig {
         );
     }
 
-//    @Scope(WebApplicationContext.SCOPE_REQUEST)
-//    @Bean(autowireCandidate = false)
-//    public IWorkoutFindByIdUsercase workoutFindByIdUsercaseBean(
-//            HttpServletResponse httpServletResponse,
-//            MappingJackson2HttpMessageConverter jacksonConverter,
-//            WorkoutJPARepository workoutJPARepository) {
-//        return new WorkoutFindByIdUsecaseImpl(
-//                new WorkoutRestPresenter(
-//                        httpServletResponse,
-//                        jacksonConverter),
-//                new WorkoutJPADatabaseGateway(workoutJPARepository)
-//        );
-//    }
+    @Scope(WebApplicationContext.SCOPE_REQUEST)
+    @Bean(autowireCandidate = false)
+    public IWorkoutFindByIdUsercase workoutFindByIdUsercaseBean(
+            HttpServletResponse httpServletResponse,
+            MappingJackson2HttpMessageConverter jacksonConverter,
+            WorkoutJPARepository workoutJPARepository) {
+        return new WorkoutFindByIdUsecaseImpl(
+                new WorkoutRestPresenter(
+                        httpServletResponse,
+                        jacksonConverter),
+                new WorkoutJPADatabaseGateway(workoutJPARepository)
+        );
+    }
 //
 //    @Scope(WebApplicationContext.SCOPE_REQUEST)
 //    @Bean(autowireCandidate = false)

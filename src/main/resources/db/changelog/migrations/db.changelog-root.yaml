@@ -25,7 +25,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: client_Id
+                  name: client_id
                   type: UUID
   - changeSet:
       id: 2
@@ -64,7 +64,7 @@ databaseChangeLog:
         - onFail: MARK_RAN
           not:
             tableExists:
-              tableName: set_configuration
+              tableName: set
       changes:
         - createTable:
             tableName: set

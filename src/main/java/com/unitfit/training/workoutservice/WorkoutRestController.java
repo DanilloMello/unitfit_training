@@ -11,22 +11,22 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/workouts")
+@RequestMapping
 public class WorkoutRestController {
 
     private final ApplicationContext context;
 
-    @PostMapping
+    @PostMapping("/workouts")
     public void create(@RequestBody WorkoutCreateRequest workoutCreateRequest){
         IWorkoutCreateUsercase createUseCase = context.getBean(IWorkoutCreateUsercase.class);
         createUseCase.execute(workoutCreateRequest);
     }
 
-//    @GetMapping
-//    public void findById(@RequestBody WorkoutFindByIdRequest request){
-//        IWorkoutFindByIdUsercase createUseCase = context.getBean(IWorkoutFindByIdUsercase.class);
-//        createUseCase.execute(request);
-//    }
+    @PostMapping("/find")
+    public void findById(@RequestBody WorkoutFindByIdRequest request){
+        IWorkoutFindByIdUsercase createUseCase = context.getBean(IWorkoutFindByIdUsercase.class);
+        createUseCase.execute(request);
+    }
 //
 //    @GetMapping
 //    public void findByClientId(@RequestBody WorkoutFindByClientIdRequest request){

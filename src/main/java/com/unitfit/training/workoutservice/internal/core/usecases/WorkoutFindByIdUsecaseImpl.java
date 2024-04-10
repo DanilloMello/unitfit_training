@@ -17,8 +17,8 @@ public class WorkoutFindByIdUsecaseImpl implements IWorkoutFindByIdUsercase {
     @Transactional
     public void execute(WorkoutFindByIdRequest request) {
         try {
-//            WorkoutFindByIdResponse workout = repository.findById(request.id());
-//            presenter.presentFindByIdUsecase(workout);
+            WorkoutFindByIdResponse workout = repository.findWorkoutById(request.id());
+            presenter.presentFindByIdUsecase(workout);
         } catch (Exception e) {
             presenter.presentError(e);
         }

@@ -29,10 +29,10 @@ public class SecurityConfig {
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(withDefaults())
-                .build();
-//                .oauth2Login(withDefaults())
-//                .oauth2ResourceServer(conf -> conf.jwt(withDefaults()))
+//                .httpBasic(withDefaults())
 //                .build();
+                .oauth2Login(withDefaults())
+                .oauth2ResourceServer(conf -> conf.jwt(withDefaults()))
+                .build();
     }
 }

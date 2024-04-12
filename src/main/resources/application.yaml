@@ -9,7 +9,7 @@ spring:
         registration:
           keycloak:
             client-id: unitfit-training-backend
-            client-secret: cZYDKY4mZmt7bu9cYJOucrCQ5BiESlx5
+            client-secret: vaJpTKjdcM86nXmtL4SBU4MvnFKXvqfp
             scope: openid, profile, email
         provider:
           keycloak:

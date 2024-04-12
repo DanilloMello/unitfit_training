@@ -32,7 +32,7 @@ public class WorkoutFactory {
                 .map(ecr ->
                         new Exercise(
                                 ecr.name(),
-                                setsRequestToSets(ecr.setsDTO()),
+                                setsRequestToSets(ecr.sets()),
                                 workout
                         ))
                 .toList();

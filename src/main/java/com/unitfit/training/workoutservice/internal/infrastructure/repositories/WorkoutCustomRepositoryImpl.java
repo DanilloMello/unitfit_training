@@ -1,15 +1,10 @@
 package com.unitfit.training.workoutservice.internal.infrastructure.repositories;
 
-import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.ExerciseDTO;
-import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.SetDTO;
 import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.WorkoutFindByIdResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.hibernate.query.Query;
-import org.hibernate.query.TupleTransformer;
+import org.hibernate.Session;
 
-import java.time.Duration;
-import java.util.List;
 import java.util.UUID;
 
 public class WorkoutCustomRepositoryImpl implements WorkoutCustomRepository {
@@ -19,46 +14,28 @@ public class WorkoutCustomRepositoryImpl implements WorkoutCustomRepository {
 
     @Override
     public WorkoutFindByIdResponse findWorkoutById(UUID workoutId) {
-        return (WorkoutFindByIdResponse) this.em.unwrap(Query.class).getSession().createQuery(
+        return this.em.unwrap(Session.class).createQuery(
                         """ 
                                    SELECT
-                                       w.name as workoutName,
-                                       e.name as exerciseName,
-                                       s.setOrder,
-                                       s.repetition,
-                                       s.repetitionByTime,
-                                       s.cadence,
-                                       s.restBetweenExercises,
-                                       s.restBetweenSets,
-                                       s.weight,
-                                       s.rangeOfMotion
+                                       w.id as workout_id,
+                                       w.name as workout_name,
+                                       e.id as exercise_id,
+                                       e.name as exercise_name,
+                                       s.setOrder as set_order,
+                                       s.repetition as repetition,
+                                       s.repetitionByTime as repetition_by_time,
+                                       s.cadence as cadence,
+                                       s.restBetweenExercises as rest_between_exercises,
+                                       s.restBetweenSets as rest_between_sets,
+                                       s.weight as weight,
+                                       s.rangeOfMotion as range_of_motion
                                    FROM Workout w
-                                   JOIN Exercise e ON e.workout_id = w.id
-                                   JOIN Set s ON s.exercise_id = e.id
+                                   JOIN w.exercises e
+                                   JOIN e.sets s
                                    WHERE w.id = :id
                                 """, WorkoutFindByIdResponse.class)
                 .setParameter("id", workoutId)
-                .setTupleTransformer((TupleTransformer<?>) (tuples, aliases) ->
-                        new WorkoutFindByIdResponse(
-                                (String) tuples[0],
-                                List.of(
-                                        new ExerciseDTO(
-                                                (String) tuples[1],
-                                                List.of(
-                                                        new SetDTO(
-                                                                (Integer) tuples[2],
-                                                                (Integer) tuples[3],
-                                                                (Duration) tuples[4],
-                                                                (String) tuples[5],
-                                                                (Duration) tuples[6],
-                                                                (Duration) tuples[7],
-                                                                (Integer) tuples[8],
-                                                                (Integer) tuples[9]
-                                                        )
-                                                )
-                                        )
-                                )
-                        )
-                ).getSingleResult();
+                .setTupleTransformer(new WorkoutResponseResultTransformer())
+                .getSingleResult();
     }
 }

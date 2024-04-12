@@ -34,7 +34,7 @@ public class Exercise extends DomainValidation {
     List<Set> sets;
 
     @NonNull
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workout_id")
     Workout workout;
 

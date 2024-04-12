@@ -4,7 +4,7 @@ import java.util.List;
 
 public record ExerciseDTO(
     String name,
-    List<SetDTO> setsDTO
+    List<SetDTO> sets
 ) implements ValidationRequestDTO {
     @Override
     public Boolean isValid() {

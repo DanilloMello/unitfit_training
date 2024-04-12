@@ -26,7 +26,7 @@ public class Workout extends DomainValidation {
     @Column
     private UUID clientId;
 
-    @Transient
+    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Exercise> exercises = new ArrayList<>();
 
     public void addExercise(Exercise exercise){

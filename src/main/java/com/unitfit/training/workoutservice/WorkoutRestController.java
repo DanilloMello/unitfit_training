@@ -1,13 +1,15 @@
 package com.unitfit.training.workoutservice;
 
 
-import com.unitfit.training.workoutservice.internal.core.usecases.*;
+import com.unitfit.training.workoutservice.internal.core.usecases.IWorkoutCreateUsercase;
+import com.unitfit.training.workoutservice.internal.core.usecases.IWorkoutFindByIdUsercase;
 import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.WorkoutCreateRequest;
-import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.WorkoutFindByClientIdRequest;
 import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.WorkoutFindByIdRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,15 +19,15 @@ public class WorkoutRestController {
     private final ApplicationContext context;
 
     @PostMapping("/workouts")
-    public void create(@RequestBody WorkoutCreateRequest workoutCreateRequest){
+    public void create(@RequestBody WorkoutCreateRequest workoutDTO){
         IWorkoutCreateUsercase createUseCase = context.getBean(IWorkoutCreateUsercase.class);
-        createUseCase.execute(workoutCreateRequest);
+        createUseCase.execute(workoutDTO);
     }
 
-    @PostMapping("/find")
-    public void findById(@RequestBody WorkoutFindByIdRequest request){
+    @GetMapping("/find")
+    public void findById(@RequestParam UUID workoutId, @RequestParam(value = "name", required = false) String nameFilter){
         IWorkoutFindByIdUsercase createUseCase = context.getBean(IWorkoutFindByIdUsercase.class);
-        createUseCase.execute(request);
+        createUseCase.execute(new WorkoutFindByIdRequest(workoutId, nameFilter));
     }
 //
 //    @GetMapping

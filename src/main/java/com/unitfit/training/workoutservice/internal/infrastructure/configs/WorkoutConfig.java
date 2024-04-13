@@ -31,8 +31,7 @@ public class WorkoutConfig {
                         httpServletResponse,
                         jacksonConverter),
                 new WorkoutFactory(
-                        new WorkoutJPADatabaseGateway(workoutJPARepository),
-                        new ExerciseJPADatabaseGateway(exerciseJPARepository)
+                        new WorkoutJPADatabaseGateway(workoutJPARepository)
                 )
         );
     }

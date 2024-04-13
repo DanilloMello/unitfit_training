@@ -26,6 +26,7 @@ public class Workout extends DomainValidation {
     @Column
     private UUID clientId;
 
+    @NonNull
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Exercise> exercises = new ArrayList<>();
 
@@ -35,6 +36,7 @@ public class Workout extends DomainValidation {
     public void addAllExercises(List<Exercise> exercises){
         this.exercises.addAll(exercises);
     }
+
     @Override
     public Boolean isValid() {
         return true;

@@ -6,7 +6,6 @@ import com.unitfit.training.workoutservice.internal.infrastructure.utils.dtos.Wo
 import org.hibernate.query.ResultListTransformer;
 import org.hibernate.query.TupleTransformer;
 
-import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,30 +22,30 @@ public class WorkoutResponseResultTransformer implements TupleTransformer<Workou
                 .collect(Collectors.toMap(
                         a -> a,
                         a -> tuples[aliasList.indexOf(a)]));
-        WorkoutFindByIdResponse workoutDTO = workoutMap
+        WorkoutFindByIdResponse workout = workoutMap
                 .computeIfAbsent(
                         (UUID) tupleMap.get("workout_id"),
                         id -> new WorkoutFindByIdResponse(
                                 (String) tupleMap.get("workout_name"),
                                 new HashSet<>()));
-        ExerciseDTO exerciseDTO = exerciseMap
+        ExerciseDTO exercise = exerciseMap
                 .computeIfAbsent(
                         (UUID) tupleMap.get("exercise_id"),
                         id -> new ExerciseDTO(
                                 (String) tupleMap.get("exercise_name"),
                                 new ArrayList<>()));
-        exerciseDTO.sets().add(new SetDTO(
+        exercise.sets().add(new SetDTO(
                                 (Integer) tupleMap.get("set_order"),
                                 (Integer) tupleMap.get("repetition"),
-                                Duration.ofSeconds(((BigDecimal) tupleMap.get("repetition_by_time")).longValue()),
+                                (Duration) tupleMap.get("repetition_by_time"),
                                 (String) tupleMap.get("cadence"),
-                                Duration.ofSeconds(((BigDecimal) tupleMap.get("rest_between_exercises")).longValue()),
-                                Duration.ofSeconds(((BigDecimal) tupleMap.get("rest_between_sets")).longValue()),
+                                (Duration) tupleMap.get("rest_between_exercises"),
+                                (Duration) tupleMap.get("rest_between_sets"),
                                 (Integer) tupleMap.get("weight"),
                                 (Integer) tupleMap.get("range_of_motion")
                         ));
-        workoutDTO.exercises().add(exerciseDTO);
-        return workoutDTO;
+        workout.exercises().add(exercise);
+        return workout;
     }
 
     @Override

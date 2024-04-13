@@ -11,7 +11,9 @@ import static java.util.Objects.isNull;
 public record Set(
         @Column(nullable = false)
         Integer setOrder,
+        @Column(nullable = false)
         Integer repetition,
+        @Column(nullable = false)
         Duration repetitionByTime,
         @Column(nullable = false)
         String cadence,
@@ -19,6 +21,7 @@ public record Set(
         Duration restBetweenExercises,
         @Column(nullable = false)
         Duration restBetweenSets,
+        @Column(nullable = false)
         Integer weight,
         @Column(nullable = false)
         Integer rangeOfMotion

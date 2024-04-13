@@ -10,9 +10,4 @@ public record SetDTO(
      Duration restBetweenSets,
      Integer weight,
      Integer rangeOfMotion
-) implements ValidationRequestDTO {
-    @Override
-    public Boolean isValid() {
-        return true;
-    }
-}
+) { }

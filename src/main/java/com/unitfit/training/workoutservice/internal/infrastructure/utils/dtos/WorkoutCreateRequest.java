@@ -4,10 +4,10 @@ import java.util.List;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
-public record WorkoutCreateRequest (List<WorkoutDTO> workoutDTOS)
+public record WorkoutCreateRequest (List<WorkoutDTO> workouts)
 {
     public WorkoutCreateRequest {
-        if (isEmpty(workoutDTOS)) {
+        if (isEmpty(workouts)) {
             throw new IllegalArgumentException("Workouts can't be null or empty");
         }
     }

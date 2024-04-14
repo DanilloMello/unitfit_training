@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 public record WorkoutDTO(
-    String name,
-    List<ExerciseDTO> exerciseDTOS,
-    UUID clientId
+        UUID id,
+        String name,
+        List<ExerciseDTO> exercises,
+        UUID clientId
 ) { }

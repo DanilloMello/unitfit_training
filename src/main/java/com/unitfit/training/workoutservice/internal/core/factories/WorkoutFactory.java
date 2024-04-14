@@ -21,9 +21,9 @@ public class WorkoutFactory {
     private final WorkoutDatabaseGateway workoutDatabase;
     
     public HttpStatus create(WorkoutCreateRequest request) {
-        List<Workout> workouts = request.workoutDTOS().stream().map( w -> {
+        List<Workout> workouts = request.workouts().stream().map( w -> {
                     Workout workout = new Workout(w.name());
-                    workout.addAllExercises(exercisesRequestToExercises(w.exerciseDTOS(), workout));
+                    workout.addAllExercises(exercisesRequestToExercises(w.exercises(), workout));
                     return workout;
         }).toList();
         workoutDatabase.saveAllWorkouts(workouts);

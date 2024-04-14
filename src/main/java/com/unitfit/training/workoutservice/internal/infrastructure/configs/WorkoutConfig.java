@@ -1,9 +1,11 @@
 package com.unitfit.training.workoutservice.internal.infrastructure.configs;
 
 import com.unitfit.training.workoutservice.internal.core.factories.WorkoutFactory;
-import com.unitfit.training.workoutservice.internal.core.usecases.*;
+import com.unitfit.training.workoutservice.internal.core.usecases.IWorkoutCreateUsercase;
+import com.unitfit.training.workoutservice.internal.core.usecases.IWorkoutFindByIdUsercase;
+import com.unitfit.training.workoutservice.internal.core.usecases.WorkoutCreateUsercaseImpl;
+import com.unitfit.training.workoutservice.internal.core.usecases.WorkoutFindByIdUsecaseImpl;
 import com.unitfit.training.workoutservice.internal.infrastructure.presenters.WorkoutRestPresenter;
-import com.unitfit.training.workoutservice.internal.infrastructure.repositories.ExerciseJPADatabaseGateway;
 import com.unitfit.training.workoutservice.internal.infrastructure.repositories.ExerciseJPARepository;
 import com.unitfit.training.workoutservice.internal.infrastructure.repositories.WorkoutJPADatabaseGateway;
 import com.unitfit.training.workoutservice.internal.infrastructure.repositories.WorkoutJPARepository;

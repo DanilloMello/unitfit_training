@@ -27,6 +27,8 @@ databaseChangeLog:
               - column:
                   name: client_id
                   type: UUID
+                  constraints:
+                    nullable: true
   - changeSet:
       id: 2
       author: admin
@@ -54,7 +56,7 @@ databaseChangeLog:
                   name: workout_id
                   type: uuid
                   constraints:
-                    nullable: true
+                    nullable: false
                     foreignKeyName: fk_workout
                     references: workout(id)
   - changeSet:
@@ -78,12 +80,12 @@ databaseChangeLog:
                   name: repetition
                   type: int
                   constraints:
-                    nullable: true
+                    nullable: false
               - column:
                   name: repetition_by_time
                   type: numeric(21)
                   constraints:
-                    nullable: true
+                    nullable: false
               - column:
                   name: cadence
                   type: varchar(4)
@@ -103,7 +105,7 @@ databaseChangeLog:
                   name: weight
                   type: int
                   constraints:
-                    nullable: true
+                    nullable: false
               - column:
                   name: range_of_motion
                   type: int
@@ -113,7 +115,7 @@ databaseChangeLog:
                   name: exercise_id
                   type: uuid
                   constraints:
-                    nullable: true
+                    nullable: false
                     foreignKeyName: fk_exercise
                     references: exercise(id)
   - changeSet:
@@ -159,3 +161,26 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: true
+  - changeSet:
+      id: 5
+      author: admin
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: customer
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_customer
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false

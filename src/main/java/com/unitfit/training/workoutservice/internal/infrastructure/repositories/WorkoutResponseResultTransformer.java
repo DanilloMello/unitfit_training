@@ -32,6 +32,7 @@ public class WorkoutResponseResultTransformer implements TupleTransformer<Workou
                 .computeIfAbsent(
                         (UUID) tupleMap.get("exercise_id"),
                         id -> new ExerciseDTO(
+                                null,
                                 (String) tupleMap.get("exercise_name"),
                                 new ArrayList<>()));
         exercise.sets().add(new SetDTO(
